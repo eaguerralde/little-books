@@ -1,7 +1,11 @@
 .list-group-item a ,
 .list-group-item-selection {
     display: inline-block;
+    cursor: pointer;
 }
 input.list-group-item-selection {
     margin-right: .5em;
+}
+.item-selected {
+    background-color: #ddd;
 }

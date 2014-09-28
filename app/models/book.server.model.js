@@ -4,7 +4,22 @@
  * Module dependencies.
  */
 var mongoose = require('mongoose'),
-	Schema = mongoose.Schema;
+	Schema = mongoose.Schema;    
+
+/**
+ * BookRead Schema
+ */
+    var BookReadSchema = new Schema({
+        user: {
+            type: Schema.ObjectId,
+            ref: 'User'
+        },
+        isRead: {
+                type: Boolean,
+                default: false
+        }
+    });    
+        
 
 /**
  * Book Schema
@@ -21,18 +36,11 @@ var BookSchema = new Schema({
 		default: 0,
 		required: 'Please fill Book page id'
 	},
-	isRead: {
-		type: Boolean,
-		default: false
-	},
 	created: {
 		type: Date,
 		default: Date.now
 	},
-	user: {
-		type: Schema.ObjectId,
-		ref: 'User'
-	}
+        users:[BookReadSchema]
 });
 
 mongoose.model('Book', BookSchema);

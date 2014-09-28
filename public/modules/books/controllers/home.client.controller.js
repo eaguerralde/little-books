@@ -7,53 +7,64 @@ angular.module('books')
             // This provides Authentication context. 
             $scope.authentication = Authentication;
             
-            // Load user books if logged in and has any
+            // Book list and preview display holders 
             $scope.booksList = [];
-            
             $scope.wikiPreview = {title: 'Select one book from the list'};
 
             // Handlers
+            //display selected item content preview when items are selected
             $scope.wikiItemHandler = function(item){
-                //display selected item content preview
+                itemSelectionHandler(item);
+                
                 Wiki.page(item.title).then(function(data){
                     $scope.wikiPreview.title = data.title;
                     $scope.wikiPreview.text = $sce.trustAsHtml(data.text);
                 });
             };
-
-            $scope.bookSelectedHandler = function(item){
-                
-            };
             
+            // handle checkbox for read books
             $scope.bookIsReadHandler = function(book){
-                if(book.user){
+                var userRead = {
+                    user: $scope.authentication.user,
+                    isRead: book.isRead
+                };
+                
+                if(book.users != undefined){
                     //Update user book data
-                    book.$update();
+                    book.$update({$push: {users: userRead}})
+                    .then(function(sb, b){
+                        
+                    });
                 }else{
                     // No user data so create new Book object
-                    var book = new Books ({
+                    var newBook = new Books ({
                             title: book.title,
-                            pageid: book.pageid,
-                            isRead: true
+                            pageid: book.pageid
+                            ,
+                            users: {$push: {users: userRead}}
                     });
 
                     // Save Book
-                    book.$save();
+                    newBook.$save().then(function(sb, b){
+                        book = newBook;
+                    });
+                }
+            };
+            
+            // Private methods
+            function itemSelectionHandler(selectedBook){
+                if(selectedBook.itemSelected){
+                   selectedBook.itemSelected = false; 
+                }else{
+                    $.each($scope.booksList, function(i, book){
+                        book.itemSelected && (book.itemSelected = false);
+                    });
+                    
+                   selectedBook.itemSelected = true;
                 }
             }
             
-            // Private methods
             function mergeWikiBooks(wikiPages, books){
-                // create objects like this
-                // {
-                //    _id: string
-                //    created: date,
-                //    pageid: int,
-                //    isRead: bool,
-                //    title: string,
-                //    user: {_id: string, displayName: string }
-                // }
-
                 var booksList = $scope.booksList;
                 if(wikiPages){
                     if(booksList){

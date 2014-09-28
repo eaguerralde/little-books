@@ -13,7 +13,7 @@
             <div data-ng-bind-html="wikiPreview.text"></div>
         </div>
         <ul class="list-group col-md-4">
-            <li data-ng-repeat="book in booksList" class="list-group-item">
+            <li data-ng-repeat="book in booksList" class="list-group-item" data-ng-class="{'item-selected': book.itemSelected}">
                 <input type="checkbox" class="list-group-item-selection" data-ng-change="bookIsReadHandler(book)"   data-ng-model="book.isRead" />
                 <a data-ng-click="wikiItemHandler(book)">
                     <h4 class="list-group-item-heading">{{ book.title }}</h4>
