@@ -10,11 +10,20 @@ var mongoose = require('mongoose'),
  * Book Schema
  */
 var BookSchema = new Schema({
-	name: {
+	title: {
 		type: String,
 		default: '',
-		required: 'Please fill Book name',
+		required: 'Please fill Book title',
 		trim: true
+	},
+	pageid: {
+		type: Number,
+		default: 0,
+		required: 'Please fill Book page id'
+	},
+	isRead: {
+		type: Boolean,
+		default: false
 	},
 	created: {
 		type: Date,

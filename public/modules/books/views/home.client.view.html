@@ -1,22 +1,22 @@
 <section data-ng-controller="HomeController">
     <br />
-    <div class="jumbotron text-center">
+<!--    <div class="jumbotron text-center">
         <div class="row">
             <div class="col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 col-xs-12">
                 <h2>Welcome to little books!!</h2>
             </div>
         </div>
-    </div>
+    </div>-->
     <div class="row">
         <div class="col-md-8">
             <h2>{{wikiPreview.title}}</h2>
             <div data-ng-bind-html="wikiPreview.text"></div>
         </div>
         <ul class="list-group col-md-4">
-            <li data-ng-repeat="page in wikiList" class="list-group-item">
-                <input type="checkbox" class="list-group-item-selection" />
-                <a data-ng-click="wikiItemHandler(page)">
-                    <h4 class="list-group-item-heading">({{ page.pageid }}) {{ page.title }}</h4>
+            <li data-ng-repeat="book in booksList" class="list-group-item">
+                <input type="checkbox" class="list-group-item-selection" data-ng-change="bookIsReadHandler(book)"   data-ng-model="book.isRead" />
+                <a data-ng-click="wikiItemHandler(book)">
+                    <h4 class="list-group-item-heading">{{ book.title }}</h4>
                 </a>
             </li>
         </ul>

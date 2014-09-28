@@ -14,9 +14,9 @@ angular.module('books').factory('Wiki', [ '$http', '$q',
                 }, handleError);
         }
         
-        function page(page) {
+        function page(title) {
             // extracts
-            return $http.jsonp(endpoint + '&action=query&prop=extracts&format=json&exlimit=1&exintro=&exsectionformat=plain&titles=' + page)
+            return $http.jsonp(endpoint + '&action=query&prop=extracts&format=json&exlimit=1&exintro=&exsectionformat=plain&titles=' + title)
             
             //full article content
             //return $http.jsonp(endpoint + '&action=parse&prop=text&page=' + page)

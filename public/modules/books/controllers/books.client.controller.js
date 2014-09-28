@@ -9,7 +9,7 @@ angular.module('books').controller('BooksController', ['$scope', '$stateParams',
 		$scope.create = function() {
 			// Create new Book object
 			var book = new Books ({
-				name: this.name
+				title: this.title
 			});
 
 			// Redirect after save
@@ -17,7 +17,7 @@ angular.module('books').controller('BooksController', ['$scope', '$stateParams',
 				$location.path('books/' + response._id);
 
 				// Clear form fields
-				$scope.name = '';
+				$scope.title = '';
 			}, function(errorResponse) {
 				$scope.error = errorResponse.data.message;
 			});
