@@ -12,11 +12,14 @@
             <h2>{{wikiPreview.title}}</h2>
             <div data-ng-bind-html="wikiPreview.text"></div>
         </div>
-        <div class="list-group col-md-4">
-            <a data-ng-repeat="page in wikiList" data-ng-click="wikiItemHandler(page)" class="list-group-item">
-                <h4 class="list-group-item-heading">- ({{ page.pageid }}) {{ page.title }}</h4>
-            </a>
-        </div>
+        <ul class="list-group col-md-4">
+            <li data-ng-repeat="page in wikiList" class="list-group-item">
+                <input type="checkbox" class="list-group-item-selection" />
+                <a data-ng-click="wikiItemHandler(page)">
+                    <h4 class="list-group-item-heading">({{ page.pageid }}) {{ page.title }}</h4>
+                </a>
+            </li>
+        </ul>
     </div>
 <!--    <div class="alert alert-warning text-center" data-ng-hide="!books.$resolved || books.length">
     	No Books yet, why don't you <a href="/#!/books/create">create one</a>?

@@ -1,0 +1,7 @@
+.list-group-item a ,
+.list-group-item-selection {
+    display: inline-block;
+}
+input.list-group-item-selection {
+    margin-right: .5em;
+}
