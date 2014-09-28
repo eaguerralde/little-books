@@ -6,24 +6,21 @@ angular.module('books')
 		// This provides Authentication context. 
 		$scope.authentication = Authentication;
 
+                // Init scope vars
                 $scope.wikiList = [];
                 $scope.wikiPreview = {title: 'Select one book from the list'};
                 
-                Wiki.search().then(function(data){
-                    $scope.wikiList = data.query.categorymembers;
+                // Display list of books
+                Wiki.list().then(function(data){
+                    $scope.wikiList = data;
                 });
                 
+                // Handlers
                 $scope.wikiItemHandler = function(item){
+                    //display selected item content preview
                     Wiki.page(item.title).then(function(data){
-                        //full article body
-                        var article = data.parse && data.parse.text['*'],
-                            infobox = $(article).filter('.infobox, p');
-                        $scope.wikiPreview.title = data.parse.title;
-                        $scope.wikiPreview.text = $sce.trustAsHtml(infobox[0] && infobox[0].innerHTML);
-
-                        //infobox content
-//                        $scope.wikiPreview.title = data.pages.title;
-//                        $scope.wikiPreview.text = $sce.trustAsHtml(data.parse.text['*']);
+                        $scope.wikiPreview.title = data.title;
+                        $scope.wikiPreview.text = $sce.trustAsHtml(data.text);
                     });
                 };
                 
