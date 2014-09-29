@@ -7,19 +7,22 @@
             </div>
         </div>
     </div>-->
-    <div class="row">
-        <div class="col-md-8">
-            <h2>{{wikiPreview.title}}</h2>
-            <div data-ng-bind-html="wikiPreview.text"></div>
+    <div class="row ">
+        <div class="col-md-12 preview navbar-fixed-bottom"> 
+            <h2 class="title">{{wikiPreview.title}}</h2>
+            <div class="body" data-ng-bind-html="wikiPreview.text"></div>
         </div>
-        <ul class="list-group col-md-4">
+        <div class="col-md-12 book-list-wrapper">
+        <ul class="list-group book-list">
             <li data-ng-repeat="book in booksList" class="list-group-item" data-ng-class="{'item-selected': book.itemSelected}">
-                <input type="checkbox" class="list-group-item-selection" data-ng-change="bookIsReadHandler(book)"   data-ng-model="book.isRead" />
+                <input type="checkbox" class="list-group-item-selection" data-ng-show="authentication.user != ''" data-ng-change="bookIsReadHandler(book)"   data-ng-model="book.isRead" />
                 <a data-ng-click="wikiItemHandler(book)">
                     <h4 class="list-group-item-heading">{{ book.title }}</h4>
                 </a>
             </li>
         </ul>
+            
+        </div>
     </div>
 <!--    <div class="alert alert-warning text-center" data-ng-hide="!books.$resolved || books.length">
     	No Books yet, why don't you <a href="/#!/books/create">create one</a>?

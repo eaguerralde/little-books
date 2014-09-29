@@ -5,11 +5,14 @@ angular.module('books')
 	function($scope, Authentication, $sce, Wiki, Books) {
             // Init scope vars
             // This provides Authentication context. 
-            $scope.authentication = Authentication;
+            $scope.authentication = Authentication; 
             
             // Book list and preview display holders 
             $scope.booksList = [];
-            $scope.wikiPreview = {title: 'Select one book from the list'};
+            $scope.wikiPreview = {
+                title: 'Welcome to little books!!', 
+                text: $sce.trustAsHtml('Select one book from the list to know a bit more about it.')
+            };
 
             // Handlers
             //display selected item content preview when items are selected
